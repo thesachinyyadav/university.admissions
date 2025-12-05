@@ -1,0 +1,331 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #254a9a;
+  --secondary: #ffffff;
+  --tertiary: #bda361;
+  /* Safe area insets for PWA/notch devices */
+  --sat: env(safe-area-inset-top, 0px);
+  --sar: env(safe-area-inset-right, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+  --sal: env(safe-area-inset-left, 0px);
+}
+
+/* Enable safe area insets for the entire document */
+html {
+  /* Ensure PWA uses full viewport */
+  height: 100%;
+  height: -webkit-fill-available;
+}
+
+body {
+  @apply bg-gray-50;
+  min-height: 100vh;
+  min-height: -webkit-fill-available;
+  /* Prevent pull-to-refresh in PWA */
+  overscroll-behavior-y: contain;
+}
+
+/* Custom Button Styles */
+.btn-primary {
+  @apply bg-primary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-primary-700 transition-all duration-300 shadow-lg hover:shadow-xl active:scale-95;
+}
+
+.btn-secondary {
+  @apply bg-tertiary-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-tertiary-700 transition-all duration-300 active:scale-95;
+}
+
+/* Card Styles - More Compact */
+.card {
+  @apply bg-white rounded-lg shadow-md p-3 sm:p-4 md:p-5 border border-gray-100 transition-shadow hover:shadow-lg;
+}
+
+/* Form Input Styles */
+.input-field {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-base transition-all;
+  /* Prevent iOS zoom on focus */
+  font-size: 16px !important;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* Input with left icon - increased padding to prevent overlap */
+.input-field.has-left-icon,
+.input-field[class*="pl-"] {
+  padding-left: 2.75rem !important; /* 44px */
+}
+
+/* Input with right icon */
+.input-field.has-right-icon {
+  padding-right: 2.75rem !important;
+}
+
+.input-field:focus {
+  @apply border-primary-500;
+}
+
+.input-field.error {
+  @apply border-red-500 focus:ring-red-500;
+}
+
+.label {
+  @apply block text-sm font-medium text-gray-700 mb-2;
+}
+
+/* Scrollable Select Dropdown */
+.select-scrollable {
+  @apply w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent text-base transition-all;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.select-scrollable option {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.select-scrollable::-webkit-scrollbar {
+  width: 8px;
+}
+
+.select-scrollable::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.select-scrollable::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+.select-scrollable::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+/* Dropdown with scrollable menu */
+.dropdown-scrollable {
+  appearance: auto;
+  -webkit-appearance: menulist;
+  -moz-appearance: menulist;
+}
+
+.dropdown-scrollable option {
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+/* For browsers that support it, limit dropdown height */
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+  .dropdown-scrollable {
+    max-height: 300px;
+  }
+}
+
+/* Badge Styles */
+.badge-pending {
+  @apply bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-xs md:text-sm font-semibold;
+}
+
+.badge-approved {
+  @apply bg-green-100 text-green-800 px-3 py-1 rounded-full text-xs md:text-sm font-semibold;
+}
+
+.badge-revoked {
+  @apply bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs md:text-sm font-semibold;
+}
+
+.badge-rejected {
+  @apply bg-red-100 text-red-800 px-3 py-1 rounded-full text-xs md:text-sm font-semibold;
+}
+
+/* Loading Animation */
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  background-size: 200% 100%;
+}
+
+/* Pulse Animation for Loading */
+@keyframes pulse-slow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse-slow {
+  animation: pulse-slow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-gray-100;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-gray-300 rounded-full hover:bg-gray-400;
+}
+
+/* Focus Visible for Accessibility */
+*:focus-visible {
+  @apply outline-none ring-4 ring-primary-300 ring-offset-2;
+}
+
+/* Skip to Main Content Link */
+.skip-to-main {
+  @apply fixed top-0 left-0 bg-primary-600 text-white px-4 py-2 rounded-br-lg z-50 -translate-y-full focus:translate-y-0 transition-transform;
+}
+
+/* Print Styles */
+@media print {
+  body {
+    @apply bg-white;
+  }
+  
+  .no-print {
+    display: none !important;
+  }
+}
+
+/* Touch Manipulation - Remove 300ms tap delay */
+button, a, input, select, textarea, [role="button"], [onclick] {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0.1);
+}
+
+/* Mobile-first touch targets */
+@media (max-width: 768px) {
+  button, a {
+    min-height: 44px;
+  }
+  
+  .card {
+    @apply p-4;
+  }
+  
+  /* Larger tap targets on mobile */
+  input[type="checkbox"],
+  input[type="radio"] {
+    @apply w-6 h-6;
+    min-width: 44px;
+    min-height: 44px;
+  }
+  
+  /* Ensure inputs are easily tappable on mobile */
+  input[type="text"],
+  input[type="password"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px !important; /* Prevents iOS zoom */
+    min-height: 48px;
+  }
+  
+  /* Better table overflow handling on mobile */
+  table {
+    display: block;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+/* PWA Standalone Mode - Safe Area Handling */
+@media all and (display-mode: standalone) {
+  /* Add padding for status bar/notch in PWA mode */
+  .pwa-safe-top {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  
+  .pwa-safe-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  
+  /* Navbar specific fix for PWA */
+  nav.sticky {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+}
+
+/* Reduce Motion for Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+  .card {
+    @apply border-2 border-gray-800;
+  }
+  
+  button {
+    @apply border-2 border-current;
+  }
+}
+
+/* Loading Spinner */
+.spinner {
+  @apply inline-block w-6 h-6 border-4 border-current border-r-transparent rounded-full animate-spin;
+}
+
+/* Gradient Text */
+.gradient-text {
+  @apply bg-gradient-to-r from-primary-600 to-primary-700 bg-clip-text text-transparent;
+}
+
+/* Glass Effect */
+.glass {
+  @apply bg-white/90 backdrop-blur-md border border-white/20;
+}
+
+/* Success Checkmark Animation */
+@keyframes checkmark {
+  0% {
+    stroke-dashoffset: 100;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.checkmark-animation {
+  stroke-dasharray: 100;
+  animation: checkmark 0.5s ease-in-out forwards;
+}
+
