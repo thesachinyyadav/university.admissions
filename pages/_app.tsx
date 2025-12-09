@@ -91,6 +91,8 @@ export default function App({ Component, pageProps }: AppProps) {
     }
   }, [router])
 
+  const showNavbar = router.pathname !== '/display-board';
+
   return (
     <>
       <Head>
@@ -102,7 +104,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <PWAProvider>
           <ToastProvider>
             {loading && <LoadingScreen />}
-            <Navbar />
+            {showNavbar && <Navbar />}
             <Component {...pageProps} />
           </ToastProvider>
         </PWAProvider>
